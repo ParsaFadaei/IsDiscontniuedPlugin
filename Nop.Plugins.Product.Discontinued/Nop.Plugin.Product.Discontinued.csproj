@@ -1,0 +1,300 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>..\..\Presentation\Nop.Web\Plugins\Product.Discontinued</OutputPath>
+		<OutDir>$(OutputPath)</OutDir>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath>..\..\Presentation\Nop.Web\Plugins\Product.Discontinued</OutputPath>
+		<OutDir>$(OutputPath)</OutDir>
+		<WarningLevel>5</WarningLevel>
+	</PropertyGroup>
+	<!-- This target execute after "Build" target -->
+	<Target Name="NopTarget" AfterTargets="Build">
+		<!-- Delete unnecessary libraries from plugins path -->
+		<MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+	</Target>
+	<ItemGroup>
+	  <None Remove="plugin.json" />
+	  <None Remove="Views\Configure.cshtml" />
+	  <None Remove="Views\Create.cshtml" />
+	  <None Remove="Views\Customer\Product\BulkEdit.cshtml" />
+	  <None Remove="Views\Customer\Product\ProductTemplate.Simple.cshtml" />
+	  <None Remove="Views\Customer\Product\_AddToCart.cshtml" />
+	  <None Remove="Views\Customer\Product\_AddToWishlist.cshtml" />
+	  <None Remove="Views\Customer\Product\_Availability.cshtml" />
+	  <None Remove="Views\Customer\Product\_BackInStockSubscription.cshtml" />
+	  <None Remove="Views\Customer\Product\_CompareProductsButton.cshtml" />
+	  <None Remove="Views\Customer\Product\_DeliveryInfo.cshtml" />
+	  <None Remove="Views\Customer\Product\_Discontinued.cshtml" />
+	  <None Remove="Views\Customer\Product\_DownloadSample.cshtml" />
+	  <None Remove="Views\Customer\Product\_GiftCardInfo.cshtml" />
+	  <None Remove="Views\Customer\Product\_IsDiscontinued.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductAttributes.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductBreadcrumb.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductDetailsPictures.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductEmailAFriendButton.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductManufacturers.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductPrice.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductReviewHelpfulness.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductReviewOverview.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductSpecifications.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductTags.cshtml" />
+	  <None Remove="Views\Customer\Product\_ProductTierPrices.cshtml" />
+	  <None Remove="Views\Customer\Product\_RentalInfo.cshtml" />
+	  <None Remove="Views\Customer\Product\_ShareButton.cshtml" />
+	  <None Remove="Views\Customer\Product\_SKU_Man_GTIN_Ven.cshtml" />
+	  <None Remove="Views\Edit.cshtml" />
+	  <None Remove="Views\List.cshtml" />
+	  <None Remove="Views\ProductAddPopup.cshtml" />
+	  <None Remove="Views\Product\Create.cshtml" />
+	  <None Remove="Views\Product\Edit.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.Info.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.Pictures.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.ProductAttributes.Combinations.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.ProductAttributes.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.ProductAttributes.Info.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.PurchasedWithOrders.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.SEO.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate.SpecificationAttributes.cshtml" />
+	  <None Remove="Views\Product\_CreateOrUpdate._StockQuantityHistory.cshtml" />
+	  <None Remove="Views\Product\_ProductEditorSettingsModal.cshtml" />
+	  <None Remove="Views\test.cshtml" />
+	  <None Remove="Views\_CreateOrUpdate.cshtml" />
+	  <None Remove="Views\_CreateOrUpdate.Info.cshtml" />
+	  <None Remove="Views\_CreateOrUpdate.Products.cshtml" />
+	  <None Remove="Views\_CreateOrUpdate.SEO.cshtml" />
+	  <None Remove="Views\_GridPagerMessages.cshtml" />
+	  <None Remove="Views\_ViewImports.cshtml" />
+	  <None Remove="Views\_ViewStart.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="plugin.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Configure.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\BulkEdit.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\ProductTemplate.Simple.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_AddToCart.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_AddToWishlist.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_Availability.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_BackInStockSubscription.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_CompareProductsButton.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_DeliveryInfo.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_Discontinued.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_DownloadSample.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_GiftCardInfo.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_IsDiscontinued.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductAttributes.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductBreadcrumb.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductDetailsPictures.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductEmailAFriendButton.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductManufacturers.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductPrice.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductReviewHelpfulness.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductReviewOverview.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductSpecifications.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductTags.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ProductTierPrices.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_RentalInfo.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_ShareButton.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Customer\Product\_SKU_Man_GTIN_Ven.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\Create.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\Edit.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.Info.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.Pictures.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.ProductAttributes.Combinations.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.ProductAttributes.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.ProductAttributes.Info.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.PurchasedWithOrders.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.SEO.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate.SpecificationAttributes.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_CreateOrUpdate._StockQuantityHistory.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Product\_ProductEditorSettingsModal.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\test.cshtml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\Shared\_GridPagerMessages.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\_ViewImports.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Views\_ViewStart.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj" />
+	  <ProjectReference Include="..\..\Libraries\Nop.Data\Nop.Data.csproj" />
+	  <ProjectReference Include="..\..\Libraries\Nop.Services\Nop.Services.csproj" />
+	  <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+	  <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj" />
+	</ItemGroup>
+</Project>
