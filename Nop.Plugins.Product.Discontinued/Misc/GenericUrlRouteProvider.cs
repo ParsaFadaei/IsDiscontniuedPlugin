@@ -6,7 +6,7 @@ using Nop.Web.Framework.Mvc.Routing;
 using Nop.Web.Framework.Seo;
 using System.Linq;
 
-namespace Nop.Plugin.ExtraAbility.Infrastructure
+namespace Nop.Plugin.Product.Discontinued.Misc
 {
     public class GenericUrlRouteProvider : IRouteProvider
     {

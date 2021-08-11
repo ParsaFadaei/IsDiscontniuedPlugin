@@ -82,8 +82,9 @@ namespace Nop.Plugin.Product.Discontinued.Factories
         private readonly IDiscontinuedService _discontinuedService;
         private readonly IStoreMappingService _storeMappingService;
         private readonly IRepository<StoreMapping> _storeMappingRepository;
+        private readonly IExtendedProductService _extendedProductService;
 
-        public PluginProductModelFactory(IRepository<StoreMapping> storeMappingRepository, IStoreMappingService storeMappingService, IDiscontinuedService discontinuedService, CurrencySettings currencySettings,
+        public PluginProductModelFactory(IExtendedProductService extendedProductService,IRepository<StoreMapping> storeMappingRepository, IStoreMappingService storeMappingService, IDiscontinuedService discontinuedService, CurrencySettings currencySettings,
             IAclSupportedModelFactory aclSupportedModelFactory, IBaseAdminModelFactory baseAdminModelFactory,
             ICategoryService categoryService, ICurrencyService currencyService, ICustomerService customerService,
             IDateTimeHelper dateTimeHelper, IDiscountService discountService,
@@ -100,6 +101,7 @@ namespace Nop.Plugin.Product.Discontinued.Factories
             IUrlRecordService urlRecordService, IWorkContext workContext, MeasureSettings measureSettings,
             TaxSettings taxSettings, VendorSettings vendorSettings)
         {
+            this._extendedProductService = extendedProductService;
             this._storeMappingRepository = storeMappingRepository;
             this._storeMappingService = storeMappingService;
             this._currencySettings = currencySettings;
@@ -1943,38 +1945,22 @@ namespace Nop.Plugin.Product.Discontinued.Factories
                 throw new ArgumentNullException(nameof(searchModel));
 
             //get products
-            var products = _productService.SearchProducts(showHidden: true,
+            var products = _extendedProductService.ExtendedSearchProducts(showHidden: true,
                 categoryIds: new List<int> { searchModel.SearchCategoryId },
                 manufacturerId: searchModel.SearchManufacturerId,
+                storeId: searchModel.SearchStoreId,
                 vendorId: _workContext.CurrentVendor?.Id ?? 0,
                 productType: searchModel.SearchProductTypeId > 0
                     ? (ProductType?)searchModel.SearchProductTypeId
                     : null,
                 keywords: searchModel.SearchProductName,
-                pageIndex: searchModel.Page - 1, pageSize: searchModel.PageSize);
-            IEnumerable<Core.Domain.Catalog.Product> discProducts = products;
-            if (searchModel.SearchDiscontinued)
-            {
-                discProducts = products.Where(a =>
-                    _discontinuedService.GetDiscontinuedById(a.Id).Equals(searchModel.SearchDiscontinued));
-            }
-            if (searchModel.SearchStoreId != 0)
-            {
-                //var query = from sm in _storeMappingRepository.Table
-                //    where sm.EntityId == entityId &&
-                //          sm.EntityName == entityName
-                //    select sm.StoreId;
+                pageIndex: searchModel.Page - 1, pageSize: searchModel.PageSize,discontinuedStatus:searchModel.SearchDiscontinued);
 
-                    discProducts = discProducts.Where(a =>
-                    _storeMappingRepository.Table.Any(s =>
-                        s.EntityId == a.Id && searchModel.SearchStoreId==s.StoreId)); 
-            }
-            
 
             //prepare list model
             var model = new ExtendedBulkEditProductListModel
             {
-                Data = discProducts.Select(product =>
+                Data = products.Select(product =>
                 {
                     //fill in model values from the entity
                     var productModel = new ExtendedBulkEditProductModel
@@ -1986,7 +1972,7 @@ namespace Nop.Plugin.Product.Discontinued.Factories
                         Price = product.Price,
                         StockQuantity = product.StockQuantity,
                         Published = product.Published,
-                        Discontinued = _discontinuedService.GetDiscontinuedById(product.Id)
+                        Discontinued = _discontinuedService.GetDiscontinuedStateById(product.Id)
                     };
 
                     //fill in additional values (not existing in the entity)

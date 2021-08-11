@@ -1409,7 +1409,7 @@ namespace Nop.Plugin.Product.Discontinued.Factories.Customer
                 StockAvailability = _productService.FormatStockMessage(product, ""),
                 HasSampleDownload = product.IsDownload && product.HasSampleDownload,
                 DisplayDiscontinuedMessage = !product.Published && _catalogSettings.DisplayDiscontinuedMessageForUnpublishedProducts,
-                DiscontinuedState = _discontinuedService.GetDiscontinuedById(product.Id)
+                DiscontinuedState = _discontinuedService.GetDiscontinuedStateById(product.Id)
             };
 
             //automatically generate product description?

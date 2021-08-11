@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Nop.Plugin.ExtraAbility.Infrastructure
+namespace Nop.Plugin.Product.Discontinued.Misc
 {
     public static class GenericPathRouteExtensions
     {

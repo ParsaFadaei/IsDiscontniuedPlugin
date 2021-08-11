@@ -28,6 +28,7 @@ namespace Nop.Plugin.Product.Discontinued.Infrastructure
             builder.RegisterType<PluginProductModelFactory>().As<IPluginProductModelFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ProductCustomerModelFactory>().As<IProductCustomerModelFactory>().InstancePerLifetimeScope();
             builder.RegisterType<DiscontinuedServices>().As<IDiscontinuedService>().InstancePerLifetimeScope();
+            builder.RegisterType<ExtendedProductService>().As<IExtendedProductService>().InstancePerLifetimeScope();
 
             //data context
             builder.RegisterPluginDataContext<DiscontinuedObjectContext>("nop_object_context_product_discontinued");

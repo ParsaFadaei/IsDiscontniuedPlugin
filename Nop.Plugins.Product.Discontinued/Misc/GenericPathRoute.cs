@@ -12,7 +12,7 @@ using Nop.Services.Seo;
 using Nop.Web.Framework.Localization;
 using Nop.Web.Framework.Seo;
 
-namespace Nop.Plugin.ExtraAbility.Infrastructure
+namespace Nop.Plugin.Product.Discontinued.Misc
 {
     public class GenericPathRoute : LocalizedRoute
     {

@@ -15,7 +15,7 @@ namespace Nop.Plugin.Product.Discontinued.Data
             builder.ToTable(nameof(DiscontinuedStatus));
             builder.HasKey(i => i.Id);
             builder.Property(s => s.DiscontinuedState);
-            builder.Property(i => i.ModelRef);
+            builder.HasIndex(i => i.ProductId).IsUnique();
         }
     }
 }

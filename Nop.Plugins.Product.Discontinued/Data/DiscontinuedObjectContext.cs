@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Nop.Core;
 using Nop.Data;
 using Nop.Data.Extensions;
@@ -20,7 +23,6 @@ namespace Nop.Plugin.Product.Discontinued.Data
         {
             modelBuilder.ApplyConfiguration(new DiscontinuedMap());
             base.OnModelCreating(modelBuilder);
-            
         }
         public DbSet<TEntity> Set<TEntity>() where TEntity : BaseEntity
         {
@@ -39,7 +41,7 @@ namespace Nop.Plugin.Product.Discontinued.Data
 
         public IQueryable<TEntity> EntityFromSql<TEntity>(string sql, params object[] parameters) where TEntity : BaseEntity
         {
-            throw new NotImplementedException();
+            return this.Set<TEntity>().FromSql(CreateSqlWithParameters(sql, parameters), parameters);
         }
 
         public int ExecuteSqlCommand(RawSqlString sql, bool doNotEnsureTransaction = false, int? timeout = null,
@@ -58,13 +60,34 @@ namespace Nop.Plugin.Product.Discontinued.Data
         {
             throw new NotImplementedException();
         }
+        protected virtual string CreateSqlWithParameters(string sql, params object[] parameters)
+        {
+            //add parameters to sql
+            for (var i = 0; i <= (parameters?.Length ?? 0) - 1; i++)
+            {
+                if (!(parameters[i] is DbParameter parameter))
+                    continue;
+
+                sql = $"{sql}{(i > 0 ? "," : string.Empty)} @{parameter.ParameterName}";
+
+                //whether parameter is output
+                if (parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Output)
+                    sql = $"{sql} output";
+            }
+
+            return sql;
+        }
         public void Install()
         {
             this.ExecuteSqlScript(this.GenerateCreateScript());
+            this.ExecuteSqlScript("ALTER TABLE dbo.DiscontinuedStatus ADD CONSTRAINT FK_Product_DiscontinuedStatus FOREIGN KEY(ProductId) REFERENCES dbo.Product(Id) ON DELETE CASCADE ON UPDATE CASCADE");
+            this.ExecuteSqlScriptFromFile("E:\\Nop\\ProductLoadAllPaged.sql");
+
         }
         public void Uninstall()
         {
             this.DropPluginTable(nameof(DiscontinuedStatus));
+            this.ExecuteSqlScriptFromFile("E:\\Nop\\ProductLoadAllPagedOriginal.sql");
         }
     }
 }

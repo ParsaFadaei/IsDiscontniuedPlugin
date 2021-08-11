@@ -253,7 +253,7 @@ namespace Nop.Plugin.Product.Discontinued.Controllers
 
             //prepare model
             var model = _pluginProductModelFactory.PreparePluginProductModel(null, product);
-            model.DiscontinuedState = _discontinuedService.GetDiscontinuedById(model.Id);
+            model.DiscontinuedState = _discontinuedService.GetDiscontinuedStateById(model.Id);
 
             return View("~/Plugins/Product.Discontinued/Views/Product/Edit.cshtml",model);
         }

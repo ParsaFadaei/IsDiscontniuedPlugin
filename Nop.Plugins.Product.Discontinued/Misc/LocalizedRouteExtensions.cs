@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using Nop.Web.Framework.Localization;
 
-namespace Nop.Plugin.ExtraAbility.Infrastructure
+namespace Nop.Plugin.Product.Discontinued.Misc
 {
     public static class LocalizedRouteExtensions
     {

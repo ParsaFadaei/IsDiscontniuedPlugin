@@ -14,7 +14,7 @@ namespace Nop.Plugin.Product.Discontinued.Models
             AvailableStores = new List<SelectListItem>();
         }
         [NopResourceDisplayName("Admin.Catalog.BulkEdit.List.Discontinued")]
-        public bool SearchDiscontinued { get; set; }
+        public bool? SearchDiscontinued { get; set; }
         [NopResourceDisplayName("Admin.Catalog.BulkEdit.List.SearchStore")]
         public int SearchStoreId { get; set; }
         public IList<SelectListItem> AvailableStores { get; set; }
